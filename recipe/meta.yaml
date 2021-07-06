@@ -18,11 +18,17 @@ build:
   script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
 
 requirements:
+  build:
+    - m2-patch  # [win]
+    - patch  # [not win]
+    - git
   host:
     - pip
     - python >=3.6
     - setuptools_scm >=3.4.1
     - toml
+    - setuptools >=42
+    - wheel
   run:
     - python >=3.6
 
