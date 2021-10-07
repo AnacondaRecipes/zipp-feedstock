@@ -29,8 +29,6 @@ requirements:
     - wheel
     - setuptools_scm >=3.4.1
     - toml
-    - setuptools >=42
-    - wheel
   run:
     - python >=3.6
 
