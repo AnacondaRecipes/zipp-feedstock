@@ -1,5 +1,5 @@
 {% set name = "zipp" %}
-{% set version = "3.6.0" %}
+{% set version = "3.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 71c644c5369f4a6e07636f0aa966270449561fcea2e3d6747b8d23efaa9d7832
-  patches:
-    # See https://github.com/jaraco/zipp/pull/30
-    - use-scm-version.patch
+  sha256: 9f50f446828eb9d45b267433fd3e9da8d801f614129124863f9c51ebceafb87d
 
 build:
   number: 0
@@ -18,19 +15,15 @@ build:
   script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
 
 requirements:
-  build:
-    - m2-patch  # [win]
-    - patch  # [not win]
-    - git
   host:
     - pip
-    - python >=3.6
+    - python
     - setuptools >=56
     - wheel
     - setuptools_scm >=3.4.1
     - toml
   run:
-    - python >=3.6
+    - python >=3.7
 
 test:
   source_files:
