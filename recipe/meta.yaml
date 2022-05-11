@@ -30,8 +30,6 @@ test:
     - test_zipp.py
   requires:
     - pip
-    - pytest >=6
-    - pytest-cov
     # this is a downstream that has a version requirement on zipp
     - importlib_metadata
     - jaraco.itertools
@@ -40,7 +38,7 @@ test:
     - zipp
   commands:
     - pip check
-    - pytest --cov={{ name }} test_zipp.py
+    - python -m unittest test_zipp.py
 
 about:
   home: https://github.com/jaraco/zipp
