@@ -1,5 +1,5 @@
 {% set name = "zipp" %}
-{% set version = "3.7.0" %}
+{% set version = "3.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 9f50f446828eb9d45b267433fd3e9da8d801f614129124863f9c51ebceafb87d
+  sha256: 56bf8aadb83c24db6c4b577e13de374ccfb67da2078beba1d037c17980bf43ad
 
 build:
   number: 0
-  noarch: python
-  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
+  skip: True  # [py<37]
+  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
 
 requirements:
   host:
@@ -23,7 +23,7 @@ requirements:
     - setuptools_scm >=3.4.1
     - toml
   run:
-    - python >=3.7
+    - python
 
 test:
   source_files:
@@ -37,8 +37,8 @@ test:
   imports:
     - zipp
   commands:
-    - python -m unittest test_zipp.py
     - pip check
+    - python -m unittest test_zipp.py
 
 about:
   home: https://github.com/jaraco/zipp
