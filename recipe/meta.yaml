@@ -1,5 +1,5 @@
 {% set name = "zipp" %}
-{% set version = "3.11.0" %}
+{% set version = "3.17.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a7a22e05929290a67401440b39690ae6563279bced5f314609d9d03798f56766
+  sha256: 84e64a1c28cf7e91ed2078bb8cc8c259cb19b76942096c8d7b84947690cabaf0
 
 build:
   number: 0
   skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -43,7 +43,7 @@ test:
     - more-itertools
   commands:
     - pip check
-    - python -m unittest tests/test_zipp.py
+    - python -m unittest tests/test_path.py
 
 about:
   home: https://github.com/jaraco/zipp
