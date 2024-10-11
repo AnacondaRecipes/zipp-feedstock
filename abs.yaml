@@ -1,2 +1,2 @@
 channels:
-  - /prefect/fs/jaraco.test-feedstock/pr1/87eb4c3
+  - https://staging.continuum.io/prefect/fs/jaraco.test-feedstock/pr1/87eb4c3
