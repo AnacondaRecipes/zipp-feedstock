@@ -19,6 +19,7 @@ requirements:
     - pip
     - python
     - setuptools
+    - setuptools_scm
     - wheel
     - toml
   run:
@@ -30,8 +31,8 @@ test:
   imports:
     - zipp
   requires:
+    - pytest >=6,!=8.1.*
     - pip
-    # this is a downstream that has a version requirement on zipp
     - jaraco.itertools
     - jaraco.test
     - func_timeout
@@ -40,7 +41,7 @@ test:
     - importlib_resources  # [py<39]
   commands:
     - pip check
-    - python -m unittest tests/test_path.py
+    - pytest tests
 
 about:
   home: https://github.com/jaraco/zipp
