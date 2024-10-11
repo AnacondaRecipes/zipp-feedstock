@@ -20,10 +20,6 @@ requirements:
     - python
     - setuptools
     - wheel
-    # Add upper bound to get around circular dependency
-    # zipp->setuptools_scm->importlib_metadata->zipp,
-    # see https://github.com/conda-forge/zipp-feedstock/commit/94b9a99af3adb8060fb705cefe27f851028f9b9a
-    - setuptools_scm >=3.4.1,<7
     - toml
   run:
     - python
@@ -42,6 +38,7 @@ test:
     - func_timeout
     - jaraco.functools
     - more-itertools
+    - importlib_resources  # [py<39]
   commands:
     - pip check
     - python -m unittest tests/test_path.py
