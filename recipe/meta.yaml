@@ -1,5 +1,5 @@
 {% set name = "zipp" %}
-{% set version = "3.17.0" %}
+{% set version = "3.20.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,23 +7,20 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 84e64a1c28cf7e91ed2078bb8cc8c259cb19b76942096c8d7b84947690cabaf0
+  sha256: bc9eb26f4506fda01b81bcde0ca78103b6e62f991b381fec825435c836edbc29
 
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
     - pip
     - python
-    - setuptools
+    - setuptools >=61.2
+    - setuptools_scm >=3.4.1
     - wheel
-    # Add upper bound to get around circular dependency
-    # zipp->setuptools_scm->importlib_metadata->zipp,
-    # see https://github.com/conda-forge/zipp-feedstock/commit/94b9a99af3adb8060fb705cefe27f851028f9b9a
-    - setuptools_scm >=3.4.1,<7
     - toml
   run:
     - python
@@ -34,16 +31,17 @@ test:
   imports:
     - zipp
   requires:
+    - pytest >=6,!=8.1.*
     - pip
-    # this is a downstream that has a version requirement on zipp
-    - importlib_metadata
     - jaraco.itertools
+    - jaraco.test
     - func_timeout
     - jaraco.functools
     - more-itertools
+    - importlib_resources  # [py<39]
   commands:
     - pip check
-    - python -m unittest tests/test_path.py
+    - pytest tests
 
 about:
   home: https://github.com/jaraco/zipp
