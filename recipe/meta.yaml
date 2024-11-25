@@ -33,15 +33,16 @@ test:
   requires:
     - pytest >=6,!=8.1.*
     - pip
-    - jaraco.itertools
-    - jaraco.test
+    - jaraco.itertools    # [py<313]
+    - jaraco.test         # [py<313]
     - func_timeout
-    - jaraco.functools
+    - jaraco.functools    # [py<313]
     - more-itertools
-    - importlib_resources  # [py<39]
+    - importlib_resources # [py<39]
   commands:
     - pip check
-    - pytest tests
+    # temporarily disabling tests for py313 until test dependencies are built.
+    - pytest tests        # [py<313]
 
 about:
   home: https://github.com/jaraco/zipp
