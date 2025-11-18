@@ -1,29 +1,33 @@
 {% set name = "zipp" %}
-{% set version = "3.21.0" %}
+{% set version = "3.23.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2c9958f6430a2040341a52eb608ed6dd93ef4392e02ffe219417c1b28b5dd1f4
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: a07157588a12518c9d4034df3fbbee09c814741a33ff63c05fa29d26a2404166
 
 build:
   number: 0
-  skip: True  # [py<39]
+  skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
     - pip
     - python
-    - setuptools >=61.2
+    - setuptools >=77
     - setuptools_scm >=3.4.1
-    - wheel
     - toml
+    - setuptools-scm >=3.4.1
+    - coherent.licensed
   run:
     - python
+  run_constrained:
+    - pytest-checkdocs >=2.4
+    - pytest-enabler >=2.2
 
 test:
   source_files:
@@ -33,16 +37,16 @@ test:
   requires:
     - pytest >=6,!=8.1.*
     - pip
-    - jaraco.itertools    # [py<313]
-    - jaraco.test         # [py<313]
+    - jaraco.itertools  # [py<313]
+    - jaraco.test  # [py<313]
     - func_timeout
-    - jaraco.functools    # [py<313]
+    - jaraco.functools  # [py<313]
     - more-itertools
-    - importlib_resources # [py<39]
+    - importlib_resources  # [py<39]
   commands:
     - pip check
     # temporarily disabling tests for py313 until test dependencies are built.
-    - pytest tests        # [py<313]
+    - pytest tests  # [py<313]
 
 about:
   home: https://github.com/jaraco/zipp
