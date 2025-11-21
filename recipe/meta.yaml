@@ -19,15 +19,12 @@ requirements:
     - pip
     - python
     - setuptools >=77
-    - setuptools_scm >=3.4.1
-    - toml
     - setuptools-scm >=3.4.1
-    - coherent.licensed
+    - toml
+    # - coherent.licensed
   run:
     - python
-  run_constrained:
-    - pytest-checkdocs >=2.4
-    - pytest-enabler >=2.2
+
 
 test:
   source_files:
@@ -35,18 +32,14 @@ test:
   imports:
     - zipp
   requires:
-    - pytest >=6,!=8.1.*
     - pip
-    - jaraco.itertools  # [py<313]
-    - jaraco.test  # [py<313]
-    - func_timeout
-    - jaraco.functools  # [py<313]
-    - more-itertools
-    - importlib_resources  # [py<39]
+    - pytest >=6,!=8.1.*
+    - jaraco.itertools 
+    - jaraco.test
   commands:
     - pip check
-    # temporarily disabling tests for py313 until test dependencies are built.
-    - pytest tests  # [py<313]
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -v tests
 
 about:
   home: https://github.com/jaraco/zipp
@@ -56,7 +49,7 @@ about:
   summary: A pathlib-compatible Zipfile object wrapper
   description: |
     Backport of pathlib-compatible object wrapper for zip files
-  doc_url: https://zipp.readthedocs.io/
+  doc_url: https://zipp.readthedocs.io
   dev_url: https://github.com/jaraco/zipp
 
 extra:
