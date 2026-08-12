@@ -1,17 +1,17 @@
 {% set name = "zipp" %}
-{% set version = "3.23.0" %}
+{% set version = "4.1.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a07157588a12518c9d4034df3fbbee09c814741a33ff63c05fa29d26a2404166
+  sha256: 4cb57381f544315db7688e976e922a2b18cdb513d21cc194eb42232ba2a3e602
 
 build:
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -20,7 +20,7 @@ requirements:
     - python
     - setuptools >=77
     - setuptools-scm >=3.4.1
-    - toml
+    - tomli <=2.0.2  # [py<311]
   run:
     - python
 
@@ -32,7 +32,7 @@ test:
   requires:
     - pip
     - pytest >=6,!=8.1.*
-    - jaraco.itertools 
+    - jaraco.itertools
     - jaraco.test
   commands:
     - pip check
