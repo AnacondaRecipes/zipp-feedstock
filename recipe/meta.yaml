@@ -1,5 +1,5 @@
 {% set name = "zipp" %}
-{% set version = "4.1.0" %}
+{% set version = "4.1.1" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 4cb57381f544315db7688e976e922a2b18cdb513d21cc194eb42232ba2a3e602
+  sha256: 7ebb7a44c021b29fd8dbd7cce6812d0d7b5b454521f93cc71af6ccd155aaa70b
 
 build:
   number: 0
@@ -21,8 +21,12 @@ requirements:
     - setuptools >=77
     - setuptools-scm >=3.4.1
     - tomli <=2.0.2  # [py<311]
+    - coherent.licensed
   run:
     - python
+  run_constrained:
+    - pytest-checkdocs >=2.14
+    - pytest-enabler >=3.4
 
 test:
   source_files:
